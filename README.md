@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the project of the condovive test.
 
-Things you may want to cover:
+To run it you have to clone the repo:
 
-* Ruby version
+´´´
+$ git clone https://github.com/darckjack/condovive.git
+´´´
 
-* System dependencies
+Enter it, edit the database information and run the following:
 
-* Configuration
+´´´
+$ bundle install
 
-* Database creation
+$ bin/rake db:create
 
-* Database initialization
+$ bin/rake db:migrate
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+$ bin/rails server
+´´´
