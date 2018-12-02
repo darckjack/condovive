@@ -1,0 +1,29 @@
+require 'test_helper'
+
+class ResidentsControllerTest < ActionDispatch::IntegrationTest
+  test "should get index" do
+    get residents_index_url
+    assert_response :success
+  end
+
+  test "should get show" do
+    get residents_show_url
+    assert_response :success
+  end
+
+  test "should get create" do
+    get residents_create_url
+    assert_response :success
+  end
+
+  test "should get update" do
+    get residents_update_url
+    assert_response :success
+  end
+
+  test "should get delete" do
+    get residents_delete_url
+    assert_response :success
+  end
+
+end

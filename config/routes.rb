@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get '/condos/:condo_id/apartments/:apartment_id/residents', to: 'residents#index'
+  get '/condos/:condo_id/apartments/:apartment_id/residents/:resident_id', to: 'residents#show'
+  post '/condos/:id/apartments/:apartment_id/residents', to: 'residents#create'
+  put '/condos/:condo_id/apartments/:apartment_id/residents/:resident_id', to: 'residents#update'
+  delete '/condos/:condo_id/apartments/:apartment_id/residents/:resident_id', to: 'residents#delete'
   get '/condos/:id/apartments', to: 'apartments#index'
   get '/condos/:condo_id/apartments/:apartment_id', to: 'apartment#show'
   post '/condos/:id/apartments', to: 'apartments#create'
