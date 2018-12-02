@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  aparment_number: 1
+  condo: one
+
+two:
+  name: MyString
+  aparment_number: 1
+  condo: two

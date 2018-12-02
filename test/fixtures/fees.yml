@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 1
+  date: 2018-12-02 01:53:18
+  apartment: one
+  user: one
+  paid: false
+
+two:
+  amount: 1
+  date: 2018-12-02 01:53:18
+  apartment: two
+  user: two
+  paid: false
