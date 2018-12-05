@@ -7,5 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 5.times do
-  condo = Condo.create({name: Faker::Name.initials, address: Faker.Address.full_address})
+  condo = Condo.create(
+           name: Faker::Name.initials,
+           address: Faker::Address.full_address
+  )
+
+  condo.save
 end

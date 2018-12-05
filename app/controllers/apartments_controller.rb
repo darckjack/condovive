@@ -19,7 +19,7 @@ class ApartmentsController < ApplicationController
     @apartment = @condo.apartments.create(apartment_params)
 
     if @apartment.save
-      render json: @apartment, status: :created, location: @apartment
+      render json: @apartment, status: :created
     else
       render json: @apartment.errors, status: :unprocessable_entity
     end
@@ -41,10 +41,11 @@ class ApartmentsController < ApplicationController
     @apartment = @condo.apartments.find(params[:apartment_id])
 
     @apartment.destroy
+    render json: {}, status: :no_content
   end
   private
 
     def apartment_params
-      params.require(:apartment).permit(:name, :apartment_number)
+      params.permit(:name, :apartment_number)
     end
 end

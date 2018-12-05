@@ -10,4 +10,20 @@ class CondosController < ApplicationController
 
     render json: @condo
   end
+
+  def create
+    @condo = Condo.create(condo_params)
+
+    if @condo.save
+      render json: @condo, status: :created, location: @condo
+    else
+      render json: @condo.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+    def condo_params
+      params.permit(:name, :address)
+    end
 end
