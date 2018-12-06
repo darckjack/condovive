@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  post '/condos/:id/apartments/:apartment_id/fees', to: 'fees#create'
+  post '/condos/:condo_id/apartments/:apartment_id/fees', to: 'fees#create'
   put '/condos/:condo_id/apartments/:apartment_id/fees/:fee_id', to: 'fees#pay'
+  get '/condos/:condo_id/apartments/:apartment_id/fees/:fee_id', to: 'fees#show'
   get '/condos/:condo_id/apartments/:apartment_id/fees', to: 'fees#unpaid'
-  get '/condos/:condo_id/apartments/:apartment_id/fees/paid', to: 'fees#paid'
+  get '/condos/:condo_id/apartments/:apartment_id/payments', to: 'fees#paid'
   get '/condos/:condo_id/apartments/:apartment_id/residents', to: 'residents#index'
   get '/condos/:condo_id/apartments/:apartment_id/residents/:resident_id', to: 'residents#show'
   post '/condos/:id/apartments/:apartment_id/residents', to: 'residents#create'

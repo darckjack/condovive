@@ -3,10 +3,13 @@ class FeesController < ApplicationController
     @condo = Condo.find(params[:condo_id])
     @apartment = @condo.apartments.find(params[:apartment_id])
 
-    @fee = @apartment.fees.create(fee_params, date: DateTime.now >> 1, paid: false)
+    @fee = @apartment.fees.create(fee_params)
+
+    @fee.date = DateTime.now >> 1
+    @fee.paid = false
 
     if @fee.save
-      render json: @fee, status: :created, location: @fee
+      render json: @fee, status: :created
     else
       render json: @fee.errors, status: :unprocessable_entity
     end
@@ -24,6 +27,14 @@ class FeesController < ApplicationController
     end
   end
 
+  def show
+    @condo = Condo.find(params[:condo_id])
+    @apartment = @condo.apartments.find(params[:apartment_id])
+    @fee = @apartment.fees.find(params[:fee_id])
+
+    render json: @fee
+  end
+
   def unpaid
     @condo = Condo.find(params[:condo_id])
     @apartment = @condo.apartments.find(params[:apartment_id])
@@ -39,4 +50,10 @@ class FeesController < ApplicationController
 
     render json: @fees
   end
+
+  private
+
+    def fee_params
+      params.permit(:amount)
+    end
 end
