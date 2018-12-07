@@ -1,4 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :name, :email, :phone
-  belongs_to :apartment
+  has_secure_password
+
+  belongs_to :apartment, optional: true
 end
