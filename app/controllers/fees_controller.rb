@@ -1,4 +1,7 @@
 class FeesController < ApplicationController
+  skip_before_action :authorize_user, only: :pay
+  before_action :authorize, only: :pay
+  
   def create
     @condo = Condo.find(params[:condo_id])
     @apartment = @condo.apartments.find(params[:apartment_id])
@@ -20,7 +23,7 @@ class FeesController < ApplicationController
     @apartment = @condo.apartments.find(params[:apartment_id])
     @fee = @apartment.fees.find(params[:fee_id])
 
-    if @fee.update(paid: true)
+    if @fee.update(paid: true, user: current_user)
       render json: @fee
     else
       render json: @fee.errors, status: :unprocessable_entity
@@ -55,5 +58,9 @@ class FeesController < ApplicationController
 
     def fee_params
       params.permit(:amount)
+    end
+
+    def authorize
+      render json: { error: 'Not Authorized' }, status: 401 unless current_user.resident?
     end
 end
