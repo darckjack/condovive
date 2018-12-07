@@ -1,8 +1,18 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_request, only: %i[login register]
+  skip_before_action :authorize_user
+
+  def index
+    @users = User.all
+
+    render json: @users
+  end
 
   def register
     @user = User.create(user_params)
+
+    @user.role = :admin
+
     if @user.save
       response = { message: 'User created successfully'}
       render json: response, status: :created

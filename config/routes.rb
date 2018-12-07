@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   post 'auth/register', to: 'users#register'
   post 'auth/login', to: 'users#login'
+  get '/users', to: 'users#index'
 
   post '/condos/:condo_id/apartments/:apartment_id/fees', to: 'fees#create'
   put '/condos/:condo_id/apartments/:apartment_id/fees/:fee_id', to: 'fees#pay'

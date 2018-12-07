@@ -1,6 +1,9 @@
 class ResidentsController < ApplicationController
+  skip_before_action :authorize_user, only: %i[show update]
+  before_action :authorize, only: %i[show update]
+
   def index
-    @condo = Condo.find(params[:id])
+    @condo = Condo.find(params[:condo_id])
     @apartment = @condo.apartments.find(params[:apartment_id])
     @residents = @apartment.users
 
@@ -19,10 +22,10 @@ class ResidentsController < ApplicationController
     @condo = Condo.find(params[:id])
     @apartment = @condo.apartments.find(params[:apartment_id])
 
-    @resident = @apartment.user.create(resident_params)
+    @resident = @apartment.users.create(resident_params)
 
     if @resident.save
-      render json: @resident, status: :created, location: @resident
+      render json: @resident, status: :created
     else
       render json: @resident.errors, status: :unprocessable_entity
     end
@@ -33,7 +36,7 @@ class ResidentsController < ApplicationController
     @apartment = @condo.apartments.find(params[:apartment_id])
     @resident = @apartment.users.find(params[:resident_id])
 
-    if @resident.update(apartment_params)
+    if @resident.update(resident_params)
       render json: @resident
     else
       render json: @resident.errors, status: :unprocessable_entity
@@ -49,7 +52,15 @@ class ResidentsController < ApplicationController
   end
   private
 
-  def apartment_params
-    params.require(:resident).permit(:name, :email, :phone)
+  def resident_params
+    params.permit(:name, :email, :phone, :password)
+  end
+
+  def authorize
+    render json: { error: 'Not Authorized' }, status: 401 unless authorized
+  end
+
+  def authorized
+     current_user.admin? || current_user == User.find(params[:resident_id])
   end
 end
