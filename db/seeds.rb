@@ -14,11 +14,30 @@ user = User.create(
 )
 
 user.save
-5.times do
+5.times do | i |
   condo = Condo.create(
            name: Faker::Name.initials,
            address: Faker::Address.full_address
   )
 
   condo.save
+
+  apartment = condo.apartments.create(name: Faker::Name.initials, apartment_number: Faker::Number.non_zero_digit)
+
+  apartment.save
+
+  fee = apartment.fees.create(amount: 30000, date: DateTime.now >> 1, paid: false )
+
+  fee.save
+
+  resident = apartment.users.create(
+                                name: Faker::Name.name,
+                                email: "resident_#{i}@resident.com",
+                                phone: Faker::PhoneNumber.phone_number,
+                                password: 'secret',
+                                role: :resident
+  )
+
+  resident.save
+
 end

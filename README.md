@@ -26,3 +26,9 @@ The credentials for login are:
     
     email: admin@admin.com
     password: secret
+    
+And the credentials for the residents are:
+
+    email: resident_{1-5}@resident.com
+    password: secret
+    
