@@ -5,7 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+user = User.create(
+               name: 'Juan Gómez',
+               email: 'admin@admin.com',
+               phone: '3315118931',
+               password: 'secret',
+               role: :admin
+)
 
+user.save
 5.times do
   condo = Condo.create(
            name: Faker::Name.initials,

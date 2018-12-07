@@ -17,5 +17,12 @@ $ bin/rake db:create
 
 $ bin/rake db:migrate
 
+$ bin/rails db:seed
+
 $ bin/rails server
 ```
+
+The credentials for login are:
+    
+    email: admin@admin.com
+    password: secret
