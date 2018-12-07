@@ -1,7 +1,7 @@
 class FeesController < ApplicationController
   skip_before_action :authorize_user, only: :pay
   before_action :authorize, only: :pay
-  
+
   def create
     @condo = Condo.find(params[:condo_id])
     @apartment = @condo.apartments.find(params[:apartment_id])
@@ -61,6 +61,13 @@ class FeesController < ApplicationController
     end
 
     def authorize
-      render json: { error: 'Not Authorized' }, status: 401 unless current_user.resident?
+      render json: { error: 'Not Authorized' }, status: 401 unless authorized
+    end
+
+    def authorized
+      @condo = Condo.find(params[:condo_id])
+      @apartment = @condo.apartments.find(params[:apartment_id])
+
+      @apartment.users.exists?(current_user.id)
     end
 end
